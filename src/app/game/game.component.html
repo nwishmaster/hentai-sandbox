@@ -1,0 +1,5 @@
+<p>game works!</p>
+
+<p *ngIf="tick$ | async as tick">the tick is: {{ tick | date: 'dd.MM.YYYY hh:mm:ss:SSS' }}</p>
+
+<button (click)="onNextClick()">next tick</button>
