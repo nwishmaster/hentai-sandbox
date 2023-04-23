@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Component, Inject } from '@angular/core';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
+import { Observable, skip, tap } from 'rxjs';
 import { Select } from '@ngxs/store';
+import { World } from 'miniplex';
 import { untilDestroyed } from '@ngneat/until-destroy';
 
 import { BaseComponent } from '~app/core/components/base';
-import { Dispatch } from '@ngxs-labs/dispatch-decorator';
-import { EcsState } from '~app/game/states/ecs';
-import { EcsSystem } from '~app/game/types/ecs';
+import { DayCircle } from '~app/core/miniplex/systems/day-circle';
+import { ExtractOne } from '~app/core/miniplex/decorators';
+import { Location } from '~app/core/miniplex/systems/location';
 import { LoopState, TickAction } from '~app/game/states/loop';
+import { MINIPLEX_WORLD_TOKEN, MiniplexService } from 'src/app/core/miniplex';
 
 @Component({
     selector: 'app-game',
@@ -16,22 +19,36 @@ import { LoopState, TickAction } from '~app/game/states/loop';
 })
 export class GameComponent extends BaseComponent {
     @Select(LoopState.tick) tick$!: Observable<Date>;
-    @Select(EcsState.systems) systems$!: Observable<EcsSystem[]>;
+
+    @ExtractOne('worldTime')
+    worldTime!: Date;
+
+    player!: any;
+
+    constructor(
+        @Inject(MINIPLEX_WORLD_TOKEN)
+        private readonly world: World,
+        private readonly miniplexService: MiniplexService,
+    ) {
+        super();
+    }
+
+    protected override initValues() {
+        this.world.add<DayCircle>({ worldTime: new Date('1163-01-01') });
+    }
 
     protected override initSubs() {
         this.tick$.pipe(
             untilDestroyed(this),
-            switchMap(() => this.systems$),
-            tap((systems) => {
-                for (const system of systems) {
-                    system.onUpdate();
-                }
-            }),
-        );
+            // skip initial tick
+            skip(1),
+            tap(() => this.miniplexService.onUpdate()),
+        ).subscribe();
     }
 
     @Dispatch()
-    onNextClick() {
+    onNextTurn(gotoLocation: Location) {
+        this.world.addComponent(this.player, 'gotoLocation', gotoLocation);
         return new TickAction();
     }
 }

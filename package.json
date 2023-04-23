@@ -25,6 +25,9 @@
         "@ngneat/until-destroy": "^10.0.0-beta.0",
         "@ngxs-labs/dispatch-decorator": "^5.0.0",
         "@ngxs/store": "^3.8.0",
+        "date-fns": "^2.29.3",
+        "miniplex": "^2.0.0-next.20",
+        "ngx-date-fns": "^10.0.1",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.12.0s"

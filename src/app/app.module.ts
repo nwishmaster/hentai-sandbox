@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 
@@ -14,7 +14,7 @@ import { CoreModule } from '~app/core/core.module';
         CoreModule,
         AppRoutingModule,
         NgxsModule.forRoot([], {
-            developmentMode: isDevMode(),
+            developmentMode: false,
         }),
         NgxsLoggerPluginModule.forRoot(),
     ],

@@ -38,6 +38,8 @@ module.exports = {
                 'sort-imports-es6-autofix',
             ],
             'rules': {
+                '@typescript-eslint/no-empty-function': ['error', { 'allow': ['constructors'] }],
+                '@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_' }],
                 '@typescript-eslint/interface-name-prefix': 'off',
                 '@typescript-eslint/explicit-function-return-type': 'off',
                 '@typescript-eslint/explicit-module-boundary-types': 'off',
