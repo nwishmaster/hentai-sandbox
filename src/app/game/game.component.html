@@ -8,9 +8,11 @@
     current location is <span style="color: red">{{ location.location }}</span>
 </p>
 
-<!--<button (click)="onNextTurn()">next tick</button>-->
+<div>
+    <button (click)="onSave()">SAVE</button>
+</div>
 
-<button (click)="onNextTurn({ location: 'A', rootLocation: null })">Goto A</button>
-<button (click)="onNextTurn({ location: 'B', rootLocation: null })">Goto B</button>
-<button (click)="onNextTurn({ location: 'C', rootLocation: null })">Goto C</button>
-<button (click)="onNextTurn({ location: 'D', rootLocation: null })">Goto D</button>
+<button (click)="onNextTurn('A')">Goto A</button>
+<button (click)="onNextTurn('B')">Goto B</button>
+<button (click)="onNextTurn('C')">Goto C</button>
+<button (click)="onNextTurn('D')">Goto D</button>
