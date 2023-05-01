@@ -3,12 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     {
+        path: 'menu',
+        loadChildren: () => import('./main/main.module').then(({ MainModule }) => MainModule),
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'menu',
+    },
+    {
         path: 'game',
-        loadChildren: () => import('./game/game.module').then((m) => m.GameModule),
+        loadChildren: () => import('./game/game.module').then(({ GameModule }) => GameModule),
     },
     {
         path: '**',
-        redirectTo: 'game',
+        redirectTo: 'menu',
     },
 ];
 

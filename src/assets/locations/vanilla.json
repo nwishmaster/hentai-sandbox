@@ -1,0 +1,77 @@
+[
+    {
+        "id": "world",
+        "rootLocation": null,
+        "childLocation": [
+            {
+                "id": "dorowan-east-gates"
+            },
+            {
+                "id": "dorowan-northwest-gates"
+            }
+        ]
+    },
+    {
+        "id": "dorowan",
+        "rootLocation": [
+            {
+                "id": "world"
+            },
+            {
+                "id": "dorowan-east-gates"
+            },
+            {
+                "id": "dorowan-northwest-gates"
+            }
+        ],
+        "childLocation": [
+            {
+                "id": "world"
+            },
+            {
+                "id": "dorowan-east-gates"
+            },
+            {
+                "id": "dorowan-northwest-gates"
+            }
+        ]
+    },
+    {
+        "id": "dorowan-east-gates",
+        "rootLocation": [
+            {
+                "id": "world"
+            },
+            {
+                "id": "dorowan"
+            }
+        ],
+        "childLocation": [
+            {
+                "id": "world"
+            },
+            {
+                "id": "dorowan"
+            }
+        ]
+    },
+    {
+        "id": "dorowan-northwest-gates",
+        "rootLocation": [
+            {
+                "id": "world"
+            },
+            {
+                "id": "dorowan"
+            }
+        ],
+        "childLocation": [
+            {
+                "id": "world"
+            },
+            {
+                "id": "dorowan"
+            }
+        ]
+    }
+]

@@ -6,10 +6,9 @@ import { World } from 'miniplex';
 import { untilDestroyed } from '@ngneat/until-destroy';
 
 import { BaseComponent } from '~app/core/components/base';
-import { ControllableMarker } from '~app/core/miniplex/systems/controllable-marker';
-import { DayCircle } from '~app/core/miniplex/systems/day-circle';
 import { ENTITY_ID_KEY } from '~app/core/miniplex/systems/id';
 import { ExtractOne } from '~app/core/miniplex/decorators';
+import { GameSavesService } from '~app/shared/game-saves';
 import { Location } from '~app/core/miniplex/systems/location';
 import { LoopState, TickAction } from '~app/game/states/loop';
 import { MINIPLEX_WORLD_TOKEN, MiniplexService } from 'src/app/core/miniplex';
@@ -31,26 +30,13 @@ export class GameComponent extends BaseComponent {
         @Inject(MINIPLEX_WORLD_TOKEN)
         private readonly world: World,
         private readonly miniplexService: MiniplexService,
+        private readonly gameSavesService: GameSavesService,
     ) {
         super();
     }
 
     protected override initValues() {
-        const player: ControllableMarker = { [ENTITY_ID_KEY]: 'PLAYER', isControllable: true };
-        const initialLocation: Location = { [ENTITY_ID_KEY]: 'id-A', location: 'A', rootLocation: null };
-
-        this.world.add<DayCircle>({ [ENTITY_ID_KEY]: 'global-time', worldTime: new Date('1163-01-01') });
-        this.world.add<Location>({ [ENTITY_ID_KEY]: 'id-B', location: 'B', rootLocation: null });
-        this.world.add<Location>({ [ENTITY_ID_KEY]: 'id-C', location: 'C', rootLocation: null });
-        this.world.add<Location>({ [ENTITY_ID_KEY]: 'id-D', location: 'D', rootLocation: null });
-        this.world.add<Location>(initialLocation);
-        this.world.add(player);
-        this.world.addComponent(player, 'location', initialLocation);
-
-        this.world.remove({ [ENTITY_ID_KEY]: 'location-b', location: 'B', rootLocation: null });
-
         this.player = this.world.with('isControllable').entities[0];
-        this.world.addComponent(player, 'gotoLocation', { [ENTITY_ID_KEY]: 'id-C', location: 'C', rootLocation: null });
     }
 
     getLocation(location: string): Location {
@@ -59,7 +45,7 @@ export class GameComponent extends BaseComponent {
     }
 
     onSave() {
-        // TODO
+        this.gameSavesService.setSave(0, { entities: this.world.entities, createdAt: new Date() });
     }
 
     protected override initSubs() {

@@ -2,26 +2,23 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-import { GameComponent } from '~app/game/game.component';
-import { GameSavesModule } from '~app/shared/game-saves';
-import { LoopStateModule } from '~app/game/states/loop';
+import { StartComponent } from '~app/main/start/start.component';
+
 
 const routes: Route[] = [
     {
         path: '',
-        component: GameComponent,
+        component: StartComponent,
     },
 ];
 
 @NgModule({
     declarations: [
-        GameComponent,
+        StartComponent,
     ],
     imports: [
         CommonModule,
-        LoopStateModule,
-        GameSavesModule,
         RouterModule.forChild(routes),
     ],
 })
-export class GameModule {}
+export class StartModule {}

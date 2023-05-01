@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
@@ -12,6 +13,7 @@ import { CoreModule } from '~app/core/core.module';
     ],
     imports: [
         CoreModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         NgxsModule.forRoot([], {
             developmentMode: false,

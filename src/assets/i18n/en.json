@@ -1,1 +1,8 @@
-{}
+{
+    "MAIN": {
+        "CONTINUE": "Continue",
+        "NEW_GAME": "New Game",
+        "LOAD": "Load Game",
+        "EXIT": "Exit"
+    }
+}

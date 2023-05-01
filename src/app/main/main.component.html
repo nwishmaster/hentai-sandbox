@@ -1,0 +1,29 @@
+<button
+    mat-button mat-stroked-button
+    class="main-menu_button"
+    [disabled]="!lastSave"
+>
+    {{ 'MAIN.CONTINUE' | transloco }}
+</button>
+
+<button
+    class="main-menu_button"
+    mat-button mat-stroked-button
+    [routerLink]="['start']"
+>
+    {{ 'MAIN.NEW_GAME' | transloco }}
+</button>
+
+<button
+    class="main-menu_button"
+    mat-button mat-stroked-button
+>
+    {{ 'MAIN.LOAD' | transloco }}
+</button>
+
+<button
+    class="main-menu_button"
+    mat-button mat-stroked-button
+>
+    {{ 'MAIN.EXIT' | transloco }}
+</button>

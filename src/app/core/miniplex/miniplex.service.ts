@@ -3,6 +3,7 @@ import { World } from 'miniplex';
 
 import { ConstructorType } from '~app/game/types/constructor.type';
 import { EcsSystem } from '~app/core/miniplex/types';
+import { GameSave } from '~app/shared/game-saves';
 import { MINIPLEX_SYSTEMS_TOKEN, MINIPLEX_WORLD_TOKEN } from '~app/core/miniplex/miniplex.contants';
 
 @Injectable({
@@ -19,6 +20,12 @@ export class MiniplexService {
     ) {
         for (const system of this.essentialSystems) {
             this.systems.push(new system(this.world));
+        }
+    }
+
+    initializeWorld({ entities }: GameSave): void {
+        for (const entity of entities) {
+            this.world.add(entity);
         }
     }
 
